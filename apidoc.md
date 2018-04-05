@@ -97,7 +97,7 @@
 
 |URL| headers|methods|
 |--|--|--|
-| /api/v1.0/book/ | 'token' : string  | POST |
+| /api/v1.0/book/ | | POST |
 
 **URL Params: 无**
 

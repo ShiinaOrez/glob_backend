@@ -1,5 +1,5 @@
 from flask import jsonify
-from  muxibook_app.exceptions import ValidationError
+from  glob_app.exceptions import ValidationError
 from . import  api
 
 def forbidden(message):

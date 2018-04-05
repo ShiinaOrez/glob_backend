@@ -8,14 +8,15 @@ from .errors import forbidden
 def update_score():
     new_score=request.get_json().get('score')
     usrname=request.get_json().get('id')
+    usr=User.query.filter_by(username=usrname).first()
     token=request.headers.get('token')
     if usr.confirm(token):
-        usr=User.query.filter_by(username=usrname)
         usr.score+=new_score
         db.session.add(usr)
         db.session.commit()
         response=jsonify({})
         response.status_code=200
+        return response
     else:
         response=jsonify({})
         response.status_code=401
@@ -32,7 +33,7 @@ def get_scoreboard():
             "score": u.score,
             "rank": k
         }
-        k++
+        k+=1
     response=jsonify({"board": board})
     response.status_code=200
     return response

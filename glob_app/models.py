@@ -16,7 +16,7 @@ class User(UserMixin,db.Model):
     def password(self):
         raise AttributeError('password is not a readable attribute')
     @password.setter
-    def password(self):
+    def password(self,password):
         self.password_hash=generate_password_hash(password)
     def verify_password(self,password):
         return check_password_hash(self.password_hash,password)
@@ -24,6 +24,21 @@ class User(UserMixin,db.Model):
     def generate_auth_token(self,expiration):
         s=Serializer(current_app.config['SECERT_KEY'],expires_in=expiration)
         return s.dumps({'id':self.id})
+    def generate_confirmation_token(self,expiration=3600):
+        s=Serializer(current_app.config['SECRET_KEY'],expiration)
+        return s.dumps({'confirm':self.id}).decode('utf-8')
+    def confirm(self,token):
+        s=Serializer(current_app.config['SECRET_KEY'])
+        try:
+            data=s.loads(token.encode('utf-8'))
+        except:
+            return False
+        if data.get('confirm')!=self.id:
+            return False
+        self.confirm=True
+        db.session.add(self)
+        return True
+
     @staticmethod
     def verify_auth_token(token):
         s=Serializer(current_app.config['SECRET_KEY'])
