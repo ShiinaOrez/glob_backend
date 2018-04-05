@@ -5,12 +5,13 @@ from ..models import User
 
 @api.route('/signup/',methods=['POST'])
 def signup():
-    usrname=request.get_json().get('id')
+    """register api"""
+    username=request.get_json().get('id')
     pasword=request.get_json().get('password')
-    usr=User.query.filter_by(username=usrname).first()
-    if usr is None:
-        usr=User(username=usrname,password=pasword,score=0)
-        db.session.add(usr)
+    user=User.query.filter_by(username=username).first()
+    if user is None:
+        user=User(username=username,password=pasword)
+        db.session.add(user)
         db.session.commit()
         response=jsonify({"msg": "successful!"})
         response.status_code=200
@@ -22,11 +23,12 @@ def signup():
 
 @api.route('/signin/',methods=['POST'])
 def signin():
-    usrname=request.get_json().get('id')
-    pasword=request.get_json().get('password')
-    usr=User.query.filter_by(username=usrname).first()
-    if usr.verify_password(pasword) :
-        token=usr.generate_confirmation_token()
+    """login api"""
+    username=request.get_json().get('id')
+    password=request.get_json().get('password')
+    user=User.query.filter_by(username=username).first()
+    if user.verify_password(password) :
+        token=user.generate_confirmation_token()
         response=jsonify({"token": token})
         response.status_code=200
         return response

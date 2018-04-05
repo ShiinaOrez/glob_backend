@@ -1,6 +1,6 @@
 from flask import jsonify
-from  muxibook_app.exceptions import ValidationError
 from . import  api
+from ..exceptions import ValidationError
 
 def forbidden(message):
     response=jsonify({'error':'forbidden','message':message})
