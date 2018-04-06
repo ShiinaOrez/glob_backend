@@ -1,3 +1,4 @@
+from sqlalchemy import desc
 from flask import jsonify,request,g,url_for,current_app
 from .. import db
 from ..models import User
@@ -24,16 +25,17 @@ def update_score():
 
 @api.route('/getscore/',methods=['GET'])
 def get_scoreboard():
-    scoreboard=db.session.query(User).order_by(User.score).all()
+    scoreboard=User.query.order_by(desc(User.score)).all()
     board=list([None,None,None,None,None,None,None,None,None,None,None])
     k=1
     for u in scoreboard:
+#        print (k)
         board[k]={
             "id": u.username,
             "score": u.score,
-            "rank": k
         }
         k+=1
+        if k>10 : break
     response=jsonify({"board": board})
     response.status_code=200
     return response
