@@ -25,7 +25,7 @@ class User(db.Model):
         return check_password_hash(self.password_hash, password)
 
     def generate_auth_token(self, expiration=3600):
-        s = Serializer(current_app.config['SECERT_KEY'], expires_in=expiration)
+        s = Serializer(current_app.config['SECRET_KEY'], expires_in=expiration)
         return s.dumps({'id': self.id})
 
     def verify_auth_token(self, token):
@@ -34,6 +34,6 @@ class User(db.Model):
             data = s.loads(token)
         except:
             return False
-        if data.get('confirm') != self.id:
+        if data.get('id') != self.id:
             return False
         return True

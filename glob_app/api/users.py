@@ -27,9 +27,9 @@ def signin():
     username=request.get_json().get('id')
     password=request.get_json().get('password')
     user=User.query.filter_by(username=username).first()
-    if user.verify_password(password) :
-        token=user.generate_confirmation_token()
-        response=jsonify({"token": token})
+    if user.verify_password(password):
+        token=user.generate_auth_token()
+        response=jsonify({"token": token.decode()})
         response.status_code=200
         return response
     else:
