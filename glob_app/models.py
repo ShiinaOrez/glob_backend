@@ -11,7 +11,7 @@ class User(db.Model):
     username = db.Column(db.String(20), unique=True)
     password = db.Column(db.String(20))
     password_hash = db.Column(db.String(128))
-    score = db.Column(db.Integer, defult=0)
+    score = db.Column(db.Integer, default=0)
 
     @property
     def password(self):
