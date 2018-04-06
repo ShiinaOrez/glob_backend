@@ -10,7 +10,6 @@ def update_score():
     new_score=request.get_json().get('score')
     username=request.get_json().get('id')
     token=request.headers.get('token')
-    print(token)
     current_user=User.query.filter_by(username=username).first_or_404()
     if  current_user.verify_auth_token(token):
         current_user.score+=int(new_score)
