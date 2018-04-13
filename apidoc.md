@@ -1,6 +1,6 @@
 |URL| headers|methods|
 |--|--|--|
-| /api/v1.0/signin/ |  | POST |
+| /api/v1.1/login/ |  | POST |
 
 **URL Params:  None**
 
@@ -8,8 +8,7 @@
 
 ```
 {
-         "id" : string,
-         "password" : string，  
+         "id" : string,  
 }
 ```
 
@@ -25,39 +24,6 @@
 
 ```
 200      // 成功
-400      // 密码错误
-```
-
-***
-
-|URL| headers|methods|
-|--|--|--|
-| /api/v1.0/signup/ | | POST |
-
-**URL Params:  None**
-
-**POST Data:**
-
-```
-{
-         "id" : string, 
-         "password" : string,
-}
-```
-
-**RETURN Data:**
-
-```
-{
-        "msg" : "successfully!"
-}
-```
-
-**Status Code**
-
-```
-200      // 成功
-401      // 用户已存在
 ```
 
 ***
@@ -65,7 +31,7 @@
 
 |URL| headers|methods|
 |--|--|--|
-| /api/v1.0/postscore/ | 'token' : string  | POST |
+| /api/v1.1/postscore/ | 'token' : string  | POST |
 
 **URL Params:  无**
 
@@ -97,7 +63,7 @@
 
 |URL| headers|methods|
 |--|--|--|
-| /api/v1.0/book/ | | POST |
+| /api/v1.1/book/ | | POST |
 
 **URL Params: 无**
 

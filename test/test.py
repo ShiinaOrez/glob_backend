@@ -53,23 +53,22 @@ class BasicTestCase(unittest.TestCase):
     #----------API FILE NAME:/home/shiina/glob_backend/glob_app/api//users.py-------------------
 
     #Test signup
-    def test_a_signup(self):
-        response = self.client.post(
-            url_for('api.signup',_external=True),
-            data = json.dumps({
-                "id":'shiina',
-                "password":'mashiro',
-            }),
-            content_type = 'application/json')
-        self.assertTrue(response.status_code == 200)
+#    def test_a_signup(self):
+#        response = self.client.post(
+#            url_for('api.signup',_external=True),
+#            data = json.dumps({
+#                "id":'shiina',
+#                "password":'mashiro',
+#            }),
+#            content_type = 'application/json')
+#        self.assertTrue(response.status_code == 200)
 
     #Test signin
-    def test_b_signin(self):
+    def test_a_login(self):
         response = self.client.post(
-            url_for('api.signin',_external=True),
+            url_for('api.login',_external=True),
             data = json.dumps({
                 "id":'shiina',
-                "password":'mashiro',
             }),
             content_type = 'application/json')
         self.assertTrue(response.status_code == 200)
